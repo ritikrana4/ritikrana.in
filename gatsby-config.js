@@ -1,15 +1,16 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Ritik Rana`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Ritik Rana`,
+      summary: `A Frontend Dev`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    description: `Ritik Rana Personal Blog - A Frontend Dev`,
+    siteUrl: `https:/ritikrana.netlify.com/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `ritikrana4`,
     },
+    keywords: `Rana Ritik, Ritik , Ritik Rana Js, ritikrana, Ritik Rana, Ritik Rana Blog, Blog, Web Development, Web, React, JavaScript, React.js, front-end web developement, front-end, personal blog`,
   },
   plugins: [
     {
@@ -60,8 +61,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Ritik Rana`,
+        short_name: `Ritik`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
