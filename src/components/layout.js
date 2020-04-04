@@ -65,7 +65,7 @@ const Layout = ({ location, title, children }) => {
       <footer>
        
 
-
+        
 
       </footer>
     </div>
