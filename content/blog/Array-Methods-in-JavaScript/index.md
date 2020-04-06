@@ -109,3 +109,46 @@ console.log(number_incremented_by_5);
 //[6, 7, 8, 9, 10, 11]
 
 ```
+or you can do it like this: using arrow function.
+
+```javascript
+
+const number = [1,2,3,4,5,6]
+const number_incremented_by_5 = number.map(element=>element+5);
+console.log(number_incremented_by_5);
+//[6, 7, 8, 9, 10, 11]
+
+```
+##5. Array.reduce()
+
+The reduce() method executes a reducer function on a provided array elements and returns a single output value.
+A reducer function is a special one. It uses two arguments accumulator and currentValue. The result of each iteration is stored in 
+accumulator.
+Lets  see an example :
+
+```javascript 
+
+const marks = [50,60,75,80,40];
+function reducer(accumulator , currentValue) {
+  return accumulator + currentValue;
+}
+const total_marks = marks.reduce(reducer);
+console.log(total_marks);
+//305
+
+```
+In the first iteration 'accumulator' holds value of first element in array.
+We can also assign it directly to some value by passing along with reducer.
+
+```javascript 
+
+const marks = [50,60,75,80,40];
+function reducer(accumulator , currentValue) {
+  return accumulator + currentValue;
+}
+const total_marks = marks.reduce(reducer,-305);
+console.log(total_marks);
+//0
+
+```
+
