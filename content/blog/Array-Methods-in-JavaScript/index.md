@@ -14,23 +14,23 @@ The find() method takes a callback function which executes on each element in ar
 and returns the value of the first element in the provided array.
 ```javascript
 
-    function greater_than_20(item){
-        return item > 20;
-    }
-    const all_numbers = [2,4,5,7,20,23,15,9];
-    const found = all_numbers.find(greater_than_20);
-    console.log(found);
-    //23
+function greater_than_20(item){
+    return item > 20;
+}
+const all_numbers = [2,4,5,7,20,23,15,9];
+const found = all_numbers.find(greater_than_20);
+console.log(found);
+//23
 
 ```
 or you can do it like this: using arrow function.
 
 ```javascript
 
- const all_numbers = [2,4,5,7,20,23,15,9];
-    const found = all_numbers.find(item => item > 20);
-    console.log(found);
-    //23
+const all_numbers = [2,4,5,7,20,23,15,9];
+const found = all_numbers.find(item => item > 20);
+console.log(found);
+//23
 
 ```
 
@@ -39,16 +39,40 @@ and if you want to use all three argument that is possible than:
 ```javascript
 
 function greater_than_20(item,index,array){
-        if(item>20 && index>4){
-            console.log(item +" "+ index + " "+ array[index]);    
-            }
+     if(item>20 && index>4){
+         console.log(item +" "+ index + " "+ array[index]);    
+        }
     }
-    const all_numbers = [2,21,5,7,20,23,15,9];
-    const found = all_numbers.find(greater_than_20);
-    //23 5 23
+const all_numbers = [2,21,5,7,20,23,15,9];
+const found = all_numbers.find(greater_than_20);
+//23 5 23
 ```
 
 ##2. Array.filter()
-coming up ...
 
+The filter() method takes each element of array and check the condition provided in callback function and creates a new array of those
+elements that satisfies the condition. If no element satisfies then a empty array is returned.
+Lets see the code :
 
+```javascript
+
+const people_age = [12,8,10,19,20,5,25,36]
+function people_above_18(age) {
+    return age > 18; 
+}
+const people_18 = people_age.filter(people_above_18);
+console.log(people_age);
+console.log(people_18);
+
+```
+or you can do it like this: using arrow function.
+
+```javascript 
+
+const people_age = [12,8,10,19,20,5,25,36]
+const people_18 = people_age.filter(age=>age>18);
+console.log(people_age);
+console.log(people_18);
+
+```
+It also accepts optional parameters like index, array.
