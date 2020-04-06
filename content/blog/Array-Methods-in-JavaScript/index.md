@@ -73,6 +73,39 @@ const people_age = [12,8,10,19,20,5,25,36]
 const people_18 = people_age.filter(age=>age>18);
 console.log(people_age);
 console.log(people_18);
+//[12, 8, 10, 19, 20, 5, 25, 36]
+//[19, 20, 25, 36]
 
 ```
 It also accepts optional parameters like index, array.
+
+##3. Array.forEach()
+
+The forEach() method just runs a function for each element of array. It does not return anything i.e. undefined.
+It is same like for loop.
+
+```javascript
+
+const arr = ['a', 'b', 'c'];
+arr.forEach(element => console.log(element));
+//a
+//b
+//c
+
+```
+
+##4. Array.map()
+
+The map() method runs a function for each element of array just like forEach() method but it also creates a new array of result, of each element.
+
+```javascript
+
+const number = [1,2,3,4,5,6]
+function inc_by_5(element){
+    return element + 5;
+}
+const number_incremented_by_5 = number.map(inc_by_5);
+console.log(number_incremented_by_5);
+//[6, 7, 8, 9, 10, 11]
+
+```
