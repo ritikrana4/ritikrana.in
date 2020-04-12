@@ -152,3 +152,77 @@ console.log(total_marks);
 
 ```
 
+##6. Array.sort()
+
+The sort method sorts the elements of the provided array. By default it sorts in ascending order.
+
+```javascript
+
+const debts= [5500,2500,1365,5000,7584,45,745];
+debts.sort();
+console.log(debts);
+//[45,745,1365,2500,5000,5500,7584]
+
+```
+We can change the sort order according to our use by passing a callback funtion.
+Lets sort the "debts" array in descending order.
+
+```javascript
+
+const debts= [5500,2500,1365,5000,7584,45,745];
+debts.sort((num1,num2)=>num2-num1);
+console.log(debts);
+//[7584, 5500, 5000, 2500, 1365, 745, 45]
+
+```
+
+##7. Array.slice()
+The slice methods returns a portion of array into a new array. It takes two parameters as index value - begin and end.
+"End index value is not included".
+
+```javascript
+
+const data = ["ritik","rahul","shubham","ashish","gaurav","piyush"]
+const partOfData = data.slice(2,5);
+console.log(partOfData);
+//["shubham", "ashish", "gaurav"]
+
+```
+What is forget or give large value to end index i.e 
+
+```javascript
+
+const data = ["ritik","rahul","shubham","ashish","gaurav","piyush"]
+const partOfData = data.slice(2);
+console.log(partOfData);
+//["shubham", "ashish", "gaurav", "piyush"]
+const partOfData2 = data.slice(2,5);
+console.log(partOfData2);
+//["shubham","ashish","gaurav"] 
+
+```
+It checks data.length property if end index is missing or greater than length of array.
+
+##8. Array.splice() 
+The splice method is used to alter the array. It helps in deleting or adding items inside a array at 
+any particular position. It returns the array with deleted items.
+It takes 3 parameter starting index , delete count from that index , and if something to add after that index.
+
+```javascript
+
+const alpha = ["a","b","c","d","e"];
+alpha.splice(2,1);
+//goes to index 2 and deletes 1 element
+console.log(alpha);
+// ["a", "b", "d", "e"]
+alpha.splice(2,0,"c")
+//goes to index 2 and deletes nothing and adds "c"
+console.log(alpha)
+//["a", "b", "c", "d", "e"]
+alpha.splice(0);
+//deletes full array as starting index is 0 and by default delete count it takes arr.length
+console.log(alpha);
+//[]
+
+```
+Thats all. Thanks for a read.
