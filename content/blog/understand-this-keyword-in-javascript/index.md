@@ -98,5 +98,36 @@ student.getDetails();
 
 ```
 Inside a Object "this" refers to scope of same Object in which it is defined.
+
+```javascript
+
+const student = {
+    name:"ritik",
+    getDetails(){
+        console.log(this.name);
+    }
+}
+
+student.getDetails();
+//ritik
+
+```
+or you replace "this" with Object name "student" like this:
+
+```javascript
+
+const student = {
+    name:"ritik",
+    getDetails(){
+        console.log(student.name);
+    }
+}
+
+student.getDetails();
+//ritik
+
+```
+Most of the time "this" is seen inside a constructor which is one of the usecase of it.
+
 Hope you get the basic of "this" in JavaScript.
  
