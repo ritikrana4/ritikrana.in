@@ -1,6 +1,6 @@
 ---
 title: Array Methods in Javascript
-date: "2015-05-01"
+date: "2020-03-01"
 description: "Make life easy, using Array Methods"
 ---
 
