@@ -1,7 +1,7 @@
 ---
 title: Understand "this" keyword in JavaScript
 date: "2020-04-18"
-description: "that is not this"
+description: "That is not this"
 ---
 
 Most of the time we confuse with this keyword in JavaScript. So lets simplify it.
