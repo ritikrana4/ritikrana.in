@@ -12,7 +12,7 @@ const Layout = ({ location, title, children }) => {
       <h1
         style={{
           ...scale(1),
-          marginBottom: rhythm(1.5),
+        //  marginBottom: rhythm(1.5),
           marginTop: 0,
         }}
       >
@@ -34,7 +34,7 @@ const Layout = ({ location, title, children }) => {
         style={{
           fontFamily: `Montserrat, sans-serif`,
           marginTop: 0,
-         
+      
 
         }}
       >
@@ -63,10 +63,7 @@ const Layout = ({ location, title, children }) => {
       <header>{header}</header>
       <main>{children}</main>
       <footer>
-       
-
-        
-
+      
       </footer>
     </div>
   )

@@ -12,31 +12,43 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
- 
+      <SEO title="Ritik Blog" />
+      <Bio/>
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article key={node.fields.slug}>
-            <header>
+           
+            <header >
               <h3
                 style={{
-                  marginBottom: rhythm(1 / 4),
+                  marginTop:20,
+                  marginBottom: rhythm(-0.5 / 4),
+                  fontFamily: `Tajawal, sans-serif`,
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <Link style={{ boxShadow: `none`,  }} to={node.fields.slug}>
                   {title}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
+              <small
+               style={{
+                color: "var(--secondaryText)",
+                fontSize: "0.7rem",
+              }}
+              >
+                {node.frontmatter.date}
+                </small>
             </header>
             <section>
-              <p
+              <div
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
                 }}
+                
               />
             </section>
+          
           </article>
         )
       })}

@@ -6,8 +6,12 @@
  */
 
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import Image from "gatsby-image"
+
+import github from "../../content/assets/social/github.svg"
+import twitter from "../../content/assets/social/twitter.svg"
+import insta from "../../content/assets/social/insta.svg"
 
 import { rhythm } from "../utils/typography"
 
@@ -37,33 +41,33 @@ const Bio = () => {
 
   const { author, social } = data.site.siteMetadata
   return (
-    <div
-      style={{
-        display: `flex`,
-        marginBottom: rhythm(1.0),
-      }}
-    >
-      <Image
-        fixed={data.avatar.childImageSharp.fixed}
-        alt={author.name}
+    
+  
+    
+     
+      <div
         style={{
-          marginRight: rhythm(1 / 2),
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
+          display: "flex",
+          justifyContent: "space-around",
+          maxWidth: 108,
+          maxHeight:22,
+          marginTop:-15,
+         marginBottom:40
         }}
-        imgStyle={{
-          borderRadius: `50%`,
-        }}
-      />
-      <p style={{fontWeight:"bold"}}>
-       {author.summary}
-        {` `}
-        <a style={{textDecoration:'none'}} href={`https://twitter.com/${social.twitter}`}>
-        <i className="fa fa-twitter" style={{fontSize:24}}></i>
+      >
+        <a style={{textDecoration:'none'}}  href="https://github.com/ritikrana4" target="_blank">
+           <img src={github} alt="GitHub" height="18" />
         </a>
-      </p>
-    </div>
+        <a  href="https://twitter.com/rtktwt" target="_blank">
+          <img src={twitter} alt="Twitter" height="18" />
+        </a>
+        <a href="https://instagram.com/ritik_dev_js" target="_blank">
+          <img src={insta} alt="Instagram" height="18" />
+        </a>
+      </div>
+  
+ 
+  
   )
 }
 
