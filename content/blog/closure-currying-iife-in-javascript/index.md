@@ -80,6 +80,7 @@ Does it stores all variables or functionality of outerFunction() in its lexical 
 ```
 So there is no variable "j" in lexical environment (scope).
 It just store what it may need during the time of execution.
+Closures are used in IIFE which we will see in later part of this article.(stay tuned)
 
 ##Currrying
 
@@ -147,3 +148,41 @@ Lets create a IIFE:
 //Its an IIFE
 
 ```
+IIFE also provide other benefits, like it helps in making our variable and methods private.
+
+```javascript
+
+const world = (function(){
+    let val;
+    
+    return{
+        createNewWorld: function(){
+                        val = true; 
+                        },
+        destroyWorld: function(){
+                    val=false;
+                    },
+        result:function(){
+            val?console.log("New world is Created"):console.log("Your world needs to be recreated")
+        }
+        
+    }
+
+})();
+
+world.createNewWorld();
+world.result();
+//New world is Created
+
+world.destroyWorld();
+world.result();
+//Your world needs to be recreated
+
+```
+In the above code sample variable "val" is a private member. We can not access it directly.
+The public methods under return function helps in accessing the private member.
+These public methods are the closures that share the same lexical environment.
+This is one of the application of closures.
+
+##The End
+ In this article we learn about Closures, Currying and IIFE. <3
