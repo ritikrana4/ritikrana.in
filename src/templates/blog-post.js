@@ -27,7 +27,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginTop: rhythm(1),
               marginBottom: 0,
               fontFamily:"Inter",
-              fontWeight:"700"
+              fontWeight:"700",
+              fontSize:56
             }}
           >
             {post.frontmatter.title}
@@ -45,7 +46,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             {post.frontmatter.date}
           </p>
         </header>
-        <section style={{color:"#444",fontFamily:"Inter"}} dangerouslySetInnerHTML={{ __html: post.html }} />
+        <section style={{color:"#444",fontFamily:"Inter",fontSize:20,lineHeight:1.6}} dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
           style={{
             marginBottom: rhythm(1),
