@@ -185,4 +185,4 @@ These public methods are the closures that share the same lexical environment.
 This is one of the application of closures.
 
 ##The End
- In this article we learn about Closures, Currying and IIFE. <3
+ In this article we learn about Closures, Currying and IIFE. <3 

@@ -17,14 +17,22 @@ const BlogIndex = ({ data, location }) => {
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
-          <article key={node.fields.slug}>
+          <article key={node.fields.slug} 
+              style={{
+                backgroundColor:'#E9F8FD',
+                padding:15,
+                marginBottom:20,
+                borderRadius:10
+              }}
+          >
            
             <header >
               <h3
                 style={{
-                  marginTop:20,
+                  marginTop:8,
                   marginBottom: rhythm(-0.5 / 4),
                   fontFamily: `Tajawal, sans-serif`,
+                  
                 }}
               >
                 <Link style={{ boxShadow: `none`,  }} to={node.fields.slug}>
@@ -35,13 +43,16 @@ const BlogIndex = ({ data, location }) => {
                style={{
                 color: "var(--secondaryText)",
                 fontSize: "0.7rem",
+                color:'#666'
               }}
               >
                 {node.frontmatter.date}
                 </small>
             </header>
             <section>
-              <div
+              <div style={{
+                color:'#666'
+              }}
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
                 }}

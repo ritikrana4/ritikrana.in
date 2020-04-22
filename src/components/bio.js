@@ -52,16 +52,17 @@ const Bio = () => {
           maxWidth: 108,
           maxHeight:22,
           marginTop:-15,
-         marginBottom:40
+         marginBottom:40,
+         
         }}
       >
-        <a style={{textDecoration:'none'}}  href="https://github.com/ritikrana4" target="_blank">
+        <a style={{ boxShadow: `none`,}}  href="https://github.com/ritikrana4" target="_blank">
            <img src={github} alt="GitHub" height="18" />
         </a>
-        <a  href="https://twitter.com/rtktwt" target="_blank">
+        <a style={{ boxShadow: `none`,}} href="https://twitter.com/rtktwt" target="_blank">
           <img src={twitter} alt="Twitter" height="18" />
         </a>
-        <a href="https://instagram.com/ritik_dev_js" target="_blank">
+        <a style={{ boxShadow: `none`,}} href="https://instagram.com/ritik_dev_js" target="_blank">
           <img src={insta} alt="Instagram" height="18" />
         </a>
       </div>

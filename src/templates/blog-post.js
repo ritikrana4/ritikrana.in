@@ -17,6 +17,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
+      
       <article>
         <header>
           <h1
@@ -57,18 +58,19 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             justifyContent: `space-between`,
             listStyle: `none`,
             padding: 0,
+           
           }}
         >
-          <li>
+          <li >
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
+              <Link style={{ boxShadow:`none`}} to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
+              <Link style={{ boxShadow:`none`}} to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →
               </Link>
             )}
