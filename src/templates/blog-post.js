@@ -11,13 +11,15 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
+  
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
-      
+  
       <article>
         <header>
           <h1
@@ -63,15 +65,15 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         >
           <li >
             {previous && (
-              <Link style={{ boxShadow:`none`}} to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+              <Link style={{ boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={previous.fields.slug} rel="prev">
+                ← Back 
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link style={{ boxShadow:`none`}} to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+              <Link style={{ boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={next.fields.slug} rel="next">
+                Next →
               </Link>
             )}
           </li>
