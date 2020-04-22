@@ -26,6 +26,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             style={{
               marginTop: rhythm(1),
               marginBottom: 0,
+              fontFamily:"Inter",
+              fontWeight:"700"
             }}
           >
             {post.frontmatter.title}
@@ -36,12 +38,14 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               display: `block`,
               marginTop:-2,
               marginBottom: rhythm(1),
+              color:"#000",
+              fontFamily:"Inter"
             }}
           >
             {post.frontmatter.date}
           </p>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
+        <section style={{color:"#444",fontFamily:"Inter"}} dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -65,14 +69,14 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         >
           <li>
             {next && (
-              <Link style={{marginLeft:0 ,boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={next.fields.slug} rel="next">
+              <Link style={{fontFamily:"Inter", marginLeft:0 ,boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={next.fields.slug} rel="next">
               ← Back 
               </Link>
             )}
           </li>
           <li >
             {previous && (
-              <Link style={{ boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={previous.fields.slug} rel="prev">
+              <Link style={{fontFamily:"Inter", boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={previous.fields.slug} rel="prev">
                  Next →
               </Link>
             )}

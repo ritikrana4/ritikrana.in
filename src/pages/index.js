@@ -10,6 +10,8 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 
+  
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Ritik Blog" />
@@ -22,7 +24,8 @@ const BlogIndex = ({ data, location }) => {
                 backgroundColor:'#E9F8FD',
                 padding:15,
                 marginBottom:20,
-                borderRadius:10
+                borderRadius:10,
+                fontFamily:"Inter"
               }}
           >
            
@@ -31,7 +34,7 @@ const BlogIndex = ({ data, location }) => {
                 style={{
                   marginTop:8,
                   marginBottom: rhythm(-0.5 / 4),
-                  fontFamily: `Tajawal, sans-serif`,
+                  fontFamily:"Inter"
                   
                 }}
               >
