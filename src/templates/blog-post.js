@@ -28,7 +28,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: 0,
               fontFamily:"Inter",
               fontWeight:"700",
-              fontSize:56
+              fontSize:50
             }}
           >
             {post.frontmatter.title}

@@ -28,7 +28,9 @@ const Layout = ({ location, title, children }) => {
         </Link>
       </h1>
     )
-  } else {
+  } 
+  else
+   {
     header = (
       <h3
         style={{
