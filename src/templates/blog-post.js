@@ -63,20 +63,21 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
            
           }}
         >
+          <li>
+            {next && (
+              <Link style={{marginLeft:0 ,boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={next.fields.slug} rel="next">
+              ← Back 
+              </Link>
+            )}
+          </li>
           <li >
             {previous && (
               <Link style={{ boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={previous.fields.slug} rel="prev">
-                ← Back 
+                 Next →
               </Link>
             )}
           </li>
-          <li>
-            {next && (
-              <Link style={{ boxShadow:`none`,backgroundColor:`#E9F8FD`,padding:10,borderRadius:8}} to={next.fields.slug} rel="next">
-                Next →
-              </Link>
-            )}
-          </li>
+          
         </ul>
       </nav>
     </Layout>
