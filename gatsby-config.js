@@ -65,7 +65,7 @@ module.exports = {
         short_name: `Ritik`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#E9F8FD`,
         display: `minimal-ui`,
         icon: `content/assets/profile-pic.png`,
       },
