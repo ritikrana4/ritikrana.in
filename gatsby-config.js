@@ -6,7 +6,7 @@ module.exports = {
       summary: `A Frontend Dev`,
     },
     description: `Ritik Rana Personal Blog - A Frontend Dev`,
-    siteUrl: `https:/ritikrana.netlify.com/`,
+    siteUrl: `https:/ritikrana.in/`,
     social: {
       twitter: `ritikrana4`,
     },
@@ -87,7 +87,7 @@ module.exports = {
       },
     },
     'gatsby-plugin-sitemap',
-    
+
     
   ],
 }
