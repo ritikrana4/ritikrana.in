@@ -86,7 +86,8 @@ module.exports = {
         showSpinner: false,
       },
     },
-    'gatsby-plugin-sitemap',
+    `gatsby-plugin-advanced-sitemap`,
+    
 
     
   ],
