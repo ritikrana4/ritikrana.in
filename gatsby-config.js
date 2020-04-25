@@ -5,7 +5,7 @@ module.exports = {
       name: `Ritik Rana`,
       summary: `A Frontend Dev`,
     },
-    description: `Ritik Rana Personal Blog - A Frontend Dev`,
+    description: `Personal Blog - A Frontend Dev`,
     siteUrl: `https://ritikrana.in/`,
     social: {
       twitter: `ritikrana4`,
