@@ -56,13 +56,13 @@ const Bio = () => {
          
         }}
       >
-        <a style={{ boxShadow: `none`,}}  href="https://github.com/ritikrana4" target="_blank">
+        <a style={{ boxShadow: `none`,}}  href="https://github.com/ritikrana4" target="_blank" rel="noopener">
            <img src={github} alt="GitHub" height="18" />
         </a>
-        <a style={{ boxShadow: `none`,}} href="https://twitter.com/rtktwt" target="_blank">
+        <a style={{ boxShadow: `none`,}} href="https://twitter.com/rtktwt" target="_blank" rel="noopener">
           <img src={twitter} alt="Twitter" height="18" />
         </a>
-        <a style={{ boxShadow: `none`,}} href="https://instagram.com/ritik_dev_js" target="_blank">
+        <a style={{ boxShadow: `none`,}} href="https://instagram.com/ritik_dev_js" target="_blank" rel="noopener">
           <img src={insta} alt="Instagram" height="18" />
         </a>
       </div>
