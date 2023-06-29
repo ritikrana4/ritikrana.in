@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 
 type nodeType = {
     node : {
@@ -14,7 +13,6 @@ type nodeType = {
 
 export const Post = ({ node } : nodeType) => {
     
-    const history = useNavigate()
     
     const handleRedirect = (url : string) => {
         window.open(url,'_blank')?.focus()
