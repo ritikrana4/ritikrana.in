@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - javascript
-description: "Lets understand template literals and the magic it can do..."
+description: ""
 ---
 
 Template literals is a feature of JavaScript that allow for more flexible and dynamic string creation. This use backticks ( \` ) instead of single or double quotes and can contain placeholders called `interpolations` or `placeholders`. These `placeholders` are indicated by the dollar sign followed by curly braces (`${expression}`) and the `placeholders` are replaced with their corresponding values.

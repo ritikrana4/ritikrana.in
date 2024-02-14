@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "About"
+title: "About me"
 ---
 
 Hey, wanderer of the web! I'm Ritik, the friendly geek crafting pixels and coaxing code into doing my bidding. Think of me as your web wizard, here to sprinkle a bit of magic on your digital adventures.
@@ -21,4 +21,3 @@ Hey, wanderer of the web! I'm Ritik, the friendly geek crafting pixels and coaxi
 - React Testing Library
 - Git
 - Material-UI
-
