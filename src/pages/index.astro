@@ -23,7 +23,16 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   <Header />
   <main id="main-content">
     <Hr />
-
+    <section id="main-aboutme">
+      <div>
+        <h1>Hey,I'm Ritik</h1>
+        <h3>
+          I'm just a regular person who enjoys playing with code and creating
+          things for fun. Here I chat about life, share my coding adventures,
+          dive into design, and more.
+        </h3>
+      </div>
+    </section>
     <!-- {
       featuredPosts.length > 0 && (
         <>
@@ -64,7 +73,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       )
     }
 
-    <!-- <div class="all-posts-btn-wrapper">
+    <div class="all-posts-btn-wrapper">
       <LinkButton href="/posts/">
         All Posts
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +82,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           ></path>
         </svg>
       </LinkButton>
-    </div> -->
+    </div>
   </main>
 
   <!-- <Footer /> -->
@@ -98,6 +107,12 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     @apply text-2xl font-semibold tracking-wide;
   }
   .all-posts-btn-wrapper {
-    @apply my-8 text-center;
+    @apply text-center;
+  }
+  #main-aboutme h1 {
+    @apply text-3xl font-bold  mt-10;
+  }
+  #main-aboutme h3 {
+    @apply text-base mb-0 mt-6 text-lg tracking-tighter leading-7;
   }
 </style>
