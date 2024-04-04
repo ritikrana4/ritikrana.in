@@ -13,7 +13,7 @@ description: ""
 
 This article dives into a comparison between mainstream UI component libraries and a new design pattern which helps in crafting light weighted yet effective components.
 
-Imagine this, You're working on a new project and you need a sleek and interactive accordion component to display content in a collapsible manner. Fortunately, `Material-UI` offers the perfect solution with its `Accordion` component. With just a few lines of code, you can smoothly bring to life a functional accordion component.
+Imagine this, you're working on a new project and you need a sleek and interactive accordion component to display content in a collapsible manner. Fortunately, `Material-UI` offers the perfect solution with its `Accordion` component. With just a few lines of code, you can smoothly bring to life a functional accordion component.
 
 But if you want to tailor it to fit seamlessly into your product's unique design language, it can be done using one of the two options:
 
