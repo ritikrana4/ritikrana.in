@@ -88,15 +88,12 @@ But component libraries that bundle functionalities and pre-designed UI componen
 - Limited control over the component.
 - Increases bundle Size as they are overloaded with styles and functionality we do not want.
 
-To overcome these, let's create an Accordion as per our needs. This will not require any other design system libraries.
-Firstly, we do not want styling files as part of the component library. Our sole aim is to create accessible components without their pre-set styling.
-
-![](../../assets/images/headless-ui-image.jpg)
-
 ## Accordion : Design
 
 To overcome these, let's create an Accordion as per our needs. This will not require any other design system libraries.
 Firstly, we do not want styling files as part of the component library. Our sole aim is to create accessible components without their pre-set styling.
+
+![](../../assets/images/headless-ui-image.jpg)
 
 Let's now write the logic that handles the functionality of our component. We will do this by creating a React hook that will handle all the logic seamlessly.
 
