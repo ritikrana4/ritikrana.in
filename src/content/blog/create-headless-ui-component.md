@@ -1,8 +1,8 @@
 ---
-title: Build your own Headless UI Accordion Component
+title: Build your own Headless UI Component
 author: Ritik Rana
 pubDatetime: 2024-03-3T18:12:47.400Z
-slug: create-headless-ui-accordion-component
+slug: create-headless-ui-component
 featured: false
 draft: false
 tags:
