@@ -11,18 +11,179 @@ export interface Props {
     description?: string;
   };
 }
-
 const { frontmatter } = Astro.props;
+const personalInfo = {
+  name: "RITIK RANA",
+  title: "Software Engineer (Frontend)",
+  email: "ritikrana4@gmail.com",
+  phone: "+917599814843",
+  location: "Bangalore, India",
+  website: "https://ritikrana.in/",
+  linkedin: "linkedin.com/in/ritikrana4/",
+};
+
+const summary =
+  "Results-driven Frontend Engineer with 2.5+ years of experience building responsive web applications and component design systems. Specializing in React.js, Redux, and modern JavaScript frameworks with expertise in UI/UX, performance optimization, and accessibility standards.";
+
+const experience = [
+  {
+    title: "Senior Software Engineer",
+    company: "Axtria, Bangalore",
+    period: "Apr 2024 - Present",
+    achievements: [
+      "Architected and implemented a scalable React component design system that improved UI consistency by 40% across multiple applications",
+      "Led code reviews and implemented best practices, resulting in 30% reduction in production bugs",
+      "Optimized CI/CD pipeline, reducing deployment time by 50% through automated testing and enhanced workflows",
+      "Engineered an Error Boundary-based logging system to capture and track production errors, improving incident response time by 35%",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    company: "Axtria, Bangalore",
+    period: "Jul 2022 - Apr 2024",
+    achievements: [
+      "Developed interactive data visualization dashboards using Highcharts that increased user engagement by 25%",
+      "Built reusable UI components for filters, charts, and other interface elements, reducing development time by 30%",
+      "Successfully migrated test suite from Enzyme to React Testing Library",
+    ],
+  },
+  {
+    title: "Intern",
+    company: "Axtria, Bangalore",
+    period: "Jan 2022 - Jul 2022",
+    achievements: [
+      "Contributed to responsive design implementations across various device viewports, improving mobile user experience",
+      "Implemented accessibility features, making applications more inclusive",
+      "Participated in agile development processes including sprint planning and daily stand-ups",
+    ],
+  },
+];
+
+const education = [
+  {
+    degree: "M. Tech. (Master of Technology)",
+    school: "NSIT, Delhi",
+    period: "7.8 CGPA",
+    additional:
+      "Teaching Assistant for Web Development, Data Analytics, Machine Learning.",
+  },
+  {
+    degree: "B. Tech. Computer Science (Bachelor of Technology)",
+    school: "MIT-AKTU, Moradabad",
+    period: "72.3%",
+    additional: "",
+  },
+];
+
+const skills = [
+  "React.js",
+  "Redux",
+  "JavaScript (ES6+)",
+  "TypeScript",
+  "HTML5",
+  "CSS3",
+  "SASS/SCSS",
+  "MUI",
+  "Git",
+  "Jenkins",
+  "Jira",
+  "Rollup",
+  "npm",
+  "Babel",
+  "React Testing Library",
+  "Enzyme",
+];
 ---
 
 <Layout title={`${frontmatter.title} | ${SITE.title}`}>
   <Header activeNav="about" />
   <Breadcrumbs />
-  <main id="main-content">
-    <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0">
-      <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
-      <slot />
-    </section>
-  </main>
-  <Footer />
+  <main id="main-content"></main>
+  <button class="download-btn" onclick="downloadPDF()"
+    >📄 Download Resume</button
+  >
+
+  <div class="container" id="resume-content">
+    <header class="header">
+      <h1 class="name">{personalInfo.name}</h1>
+      <div class="job-title">{personalInfo.title}</div>
+      <div class="contact-info">
+        <div class="contact-item">
+          📍 {personalInfo.location}
+        </div>
+        <div class="contact-item">
+          📧 <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+        </div>
+        <div class="contact-item">
+          📱 {personalInfo.phone}
+        </div>
+        <div class="contact-item">
+          🌐 <a
+            href={personalInfo.website}
+            target="_blank"
+            rel="noopener noreferrer">{personalInfo.website}</a
+          >
+        </div>
+        <div class="contact-item">
+          💼 <a
+            href={`https://${personalInfo.linkedin}`}
+            target="_blank"
+            rel="noopener noreferrer">{personalInfo.linkedin}</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="section">
+        <p class="summary">{summary}</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Work Experience</h2>
+        {
+          experience.map(job => (
+            <div class="experience-item">
+              <div class="experience-header">
+                <div class="position-title">{job.title}</div>
+                <div class="company">{job.company}</div>
+                <div class="period">{job.period}</div>
+              </div>
+              <ul class="achievements">
+                {job.achievements.map(achievement => (
+                  <li>{achievement}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Education</h2>
+        {
+          education.map(edu => (
+            <div class="education-item">
+              <div class="education-header">
+                <div class="degree">{edu.degree}</div>
+                <div class="school">{edu.school}</div>
+                <div class="period">{edu.period}</div>
+              </div>
+              {edu.additional && (
+                <div class="additional-info">{edu.additional}</div>
+              )}
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+          {skills.map(skill => <span class="skill-tag">{skill}</span>)}
+        </div>
+      </section>
+    </main>
+  </div>
 </Layout>
+<Footer />

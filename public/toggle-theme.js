@@ -74,3 +74,10 @@ window
     themeValue = isDark ? "dark" : "light";
     setPreference();
   });
+
+function downloadPDF() {
+  const link = document.createElement("a");
+  link.href = "/resume/resume.pdf";
+  link.download = "Ritik_Rana_Resume.pdf";
+  link.click();
+}
