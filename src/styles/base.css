@@ -918,10 +918,10 @@ html[data-theme="dark"] .skill-tag {
                 font-size: 1.3rem;
             }
 
-            .project-links {
+            /* .project-links {
                 flex-direction: column;
                 align-items: flex-start;
-            }
+            } */
 
             .project-link {
                 width: fit-content;
