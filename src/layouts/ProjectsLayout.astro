@@ -1,0 +1,165 @@
+---
+import { SITE } from "@config";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Layout from "./Layout.astro";
+import Main from "./Main.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+  };
+}
+const { frontmatter } = Astro.props;
+
+const projects = [
+  {
+    year: "2025",
+    title: "@rtkstack/mapper",
+    description:
+      "A flexible React TypeScript component for creating mappings with searchable dropdowns, dynamic row management",
+    stars: 2,
+    links: [
+      { type: "Source", url: "https://github.com/ritikrana4/rtk-mapping" },
+      { type: "Demo", url: "https://codesandbox.io/p/sandbox/ggd4hv" },
+      { type: "npm", url: "https://www.npmjs.com/package/@rtkstack/mapper" },
+    ],
+  },
+  // {
+  //     year: "2022",
+  //     title: "Keyboard Accordion",
+  //     description: "Play the accordion online!",
+  //     stars: 189,
+  //     links: [
+  //         { type: "Article", url: "#" },
+  //         { type: "Demo", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2020",
+  //     title: "TakeNote",
+  //     description: "A free, open source notes app",
+  //     stars: 7021,
+  //     links: [
+  //         { type: "Article", url: "#" },
+  //         { type: "Demo", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2019",
+  //     title: "Chip8",
+  //     description: "A retro game emulator",
+  //     stars: 447,
+  //     links: [
+  //         { type: "Article", url: "#" },
+  //         { type: "Demo", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2021",
+  //     title: "Sokoban",
+  //     description: "A web-based Sokoban",
+  //     stars: 92,
+  //     links: [
+  //         { type: "Article", url: "#" },
+  //         { type: "Demo", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2015",
+  //     title: "New Moon",
+  //     description: "The optimized dark theme",
+  //     stars: 1229,
+  //     links: [
+  //         { type: "Demo", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2018",
+  //     title: "Laconia",
+  //     description: "An MVC framework from scratch",
+  //     stars: 362,
+  //     links: [
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2017",
+  //     title: "Primitive",
+  //     description: "A front-end design toolkit",
+  //     stars: 931,
+  //     links: [
+  //         { type: "Demo", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // },
+  // {
+  //     year: "2019",
+  //     title: "Snek",
+  //     description: "A terminal-based Snake",
+  //     stars: 273,
+  //     links: [
+  //         { type: "Article", url: "#" },
+  //         { type: "Source", url: "#" }
+  //     ]
+  // }
+];
+---
+
+<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+  <Header activeNav="projects" />
+  <Main pageTitle="Projects" pageDesc="" />
+  <!-- <Breadcrumbs /> -->
+  <div class="projects-container">
+    <!-- <div class="header">
+            <h1>Projects</h1>
+            <p>
+                Open-source projects I've made over the years, including this website,
+                an emulator, and various games, apps, frameworks, and boilerplates.
+            </p>
+        </div> -->
+
+    <div class="projects-grid">
+      {
+        projects.map((project, index) => (
+          <div
+            class="project-card"
+            style={`animation-delay: ${(index + 1) * 0.1}s`}
+          >
+            {/* <div class="project-header">
+                        <span class="project-year">{project.year}</span>
+                        <div class="project-stars">
+                            <span class="star-icon">⭐</span>
+                            <span>{project.stars.toLocaleString()}</span>
+                        </div>
+                    </div> */}
+
+            <h2 class="project-title">{project.title}</h2>
+            <p class="project-description">{project.description}</p>
+
+            <div class="project-links">
+              {project.links.map(link => (
+                <a
+                  href={link.url}
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.type}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+<Footer />
