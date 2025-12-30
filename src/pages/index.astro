@@ -8,7 +8,7 @@ import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS } from "@config";
+import { SOCIALS, SITE } from "@config";
 
 const posts = await getCollection("blog");
 
@@ -20,6 +20,15 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": SITE.author,
+    "url": SITE.website,
+    "sameAs": SOCIALS.filter(s => s.active).map(s => s.href),
+    "jobTitle": "Software Developer",
+    "description": SITE.desc
+  })} />
   <Header />
   <main id="main-content">
     <Hr />

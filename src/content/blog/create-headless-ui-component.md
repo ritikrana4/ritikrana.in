@@ -8,7 +8,7 @@ draft: false
 tags:
   - javascript
   - design
-description: ""
+description: "Learn how to build lightweight, customizable UI components using the Headless UI pattern. Compare traditional component libraries with headless approaches and discover how to create flexible, accessible components without pre-set styling."
 ---
 
 This article dives into a comparison between mainstream UI component libraries and a new design pattern which helps in crafting light weighted yet effective components.
@@ -76,7 +76,7 @@ After a few days, they may come with a new requirement for functionalities aroun
 
 So we're stuck looking for another Component Library that fits our needs. After exploring and experimenting, we may be able to produce something that fits the criteria. It may look like something below:
 
-![](../../assets/images/meme.png)
+![A humorous meme showing a hybrid component made from multiple component libraries](../../assets/images/meme.png)
 
 While it looks like a not-so-pleasant hybrid of a lot of things, it serves our needs!
 
@@ -93,7 +93,7 @@ But component libraries that bundle functionalities and pre-designed UI componen
 To overcome these, let's create an Accordion as per our needs. This will not require any other design system libraries.
 Firstly, we do not want styling files as part of the component library. Our sole aim is to create accessible components without their pre-set styling.
 
-![](../../assets/images/headless-ui-image.jpg)
+![Diagram showing the concept of headless UI components - logic separated from styling](../../assets/images/headless-ui-image.jpg)
 
 Let's now write the logic that handles the functionality of our component. We will do this by creating a React hook that will handle all the logic seamlessly.
 
@@ -139,7 +139,7 @@ export default function App() {
 }
 ```
 
-![](../../assets/images/headless-ui-image2.png)
+![Example of a custom accordion component built with headless UI pattern](../../assets/images/headless-ui-image2.png)
 
 Now, the end-user has complete control to render any UI they desire by using the logic required from the custom hook. Isn’t that great?
 
@@ -221,7 +221,7 @@ Now end-user can pass down their props using `getTogglerProps`.
 </button>
 ```
 
-![](../../assets/images/headless-ui-image4.png)
+![Accordion component with custom styling using getTogglerProps method](../../assets/images/headless-ui-image4.png)
 
 The above `getTogglerProps` method adds all the props to the button that includes the onClick event.
 
@@ -381,7 +381,7 @@ export default function Accordion() {
 }
 ```
 
-![](../../assets/images/headless-ui-image3.png)
+![Final production-ready accordion component with custom styles and functionality](../../assets/images/headless-ui-image3.png)
 
 - [Code Repo](https://github.com/ritikrana4/react-headless-pattern-components) ↗️
 

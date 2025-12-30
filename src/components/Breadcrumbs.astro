@@ -22,7 +22,32 @@ breadcrumbList[0] === "tags" &&
       Number(breadcrumbList[2]) === 1 ? "" : "(page " + breadcrumbList[2] + ")"
     }`
   );
+
+// Build breadcrumb items for JSON-LD
+const breadcrumbItems = [
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": Astro.site?.href || "https://ritikrana.in/"
+  },
+  ...breadcrumbList.map((breadcrumb, index) => {
+    const breadcrumbPath = breadcrumbList.slice(0, index + 1).join("/");
+    return {
+      "@type": "ListItem",
+      "position": index + 2,
+      "name": decodeURIComponent(breadcrumb),
+      "item": `${Astro.site?.href || "https://ritikrana.in/"}${breadcrumbPath}/`
+    };
+  })
+];
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems
+})} />
 
 <nav class="breadcrumb" aria-label="breadcrumb">
   <ul>

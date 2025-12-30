@@ -14,6 +14,7 @@ export interface Props {
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
+  tags?: string[];
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
+  tags = [],
 } = Astro.props;
 
 const socialImageURL = new URL(
@@ -40,8 +42,11 @@ const socialImageURL = new URL(
 >
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -53,18 +58,29 @@ const socialImageURL = new URL(
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={pubDatetime ? "article" : "website"} />
+    <meta property="og:site_name" content={SITE.title} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:alt" content={description || title} />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Article Published/Modified time -->
     {
       pubDatetime && (
-        <meta
-          property="article:published_time"
-          content={pubDatetime.toISOString()}
-        />
+        <>
+          <meta
+            property="article:published_time"
+            content={pubDatetime.toISOString()}
+          />
+          <meta property="article:author" content={author} />
+          <meta property="article:section" content="Technology" />
+          {tags && tags.length > 0 && tags.map(tag => (
+            <meta property="article:tag" content={tag} />
+          ))}
+        </>
       )
     }
     {
@@ -77,21 +93,34 @@ const socialImageURL = new URL(
     }
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:image:alt" content={description || title} />
 
-    <!-- Google Font -->
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    
+    <!-- Google Font - Load asynchronously to prevent render blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
-    <meta name="theme-color" content="" />
+    <meta name="theme-color" content="#000000" />
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -104,9 +133,143 @@ const socialImageURL = new URL(
       )
     }
 
+    <!-- JSON-LD Structured Data -->
+    {
+      pubDatetime ? (
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": title,
+          "description": description,
+          "image": socialImageURL,
+          "datePublished": pubDatetime.toISOString(),
+          "dateModified": (modDatetime || pubDatetime).toISOString(),
+          "author": {
+            "@type": "Person",
+            "name": author,
+            "url": SITE.website
+          },
+          "publisher": {
+            "@type": "Person",
+            "name": SITE.author,
+            "url": SITE.website
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": canonicalURL
+          },
+          ...(tags && tags.length > 0 ? { "keywords": tags.join(", ") } : {})
+        })} />
+      ) : (
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": SITE.title,
+          "url": SITE.website,
+          "description": SITE.desc,
+          "author": {
+            "@type": "Person",
+            "name": SITE.author,
+            "url": SITE.website
+          }
+        })} />
+      )
+    }
+
     <ViewTransitions />
 
-    <script is:inline src="/toggle-theme.js"></script>
+    <!-- Theme script - inline and optimized to prevent blocking -->
+    <script is:inline define:vars={{ primaryColorScheme: "dark" }}>
+      (function() {
+        const primaryColorScheme = "dark";
+        let currentTheme;
+        try {
+          currentTheme = localStorage.getItem("theme");
+        } catch (e) {
+          // Ignore localStorage errors
+          currentTheme = null;
+        }
+        
+        function getPreferTheme() {
+          if (currentTheme) return currentTheme;
+          if (primaryColorScheme) return primaryColorScheme;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        
+        let themeValue = getPreferTheme();
+        
+        function setPreference() {
+          try {
+            localStorage.setItem("theme", themeValue);
+          } catch (e) {
+            // Ignore localStorage errors (e.g., in private browsing)
+          }
+          reflectPreference();
+        }
+        
+        function reflectPreference() {
+          document.documentElement.setAttribute("data-theme", themeValue);
+          const themeBtn = document.querySelector("#theme-btn");
+          if (themeBtn) themeBtn.setAttribute("aria-label", themeValue);
+          
+          // Use requestAnimationFrame to avoid blocking
+          requestAnimationFrame(() => {
+            const body = document.body;
+            if (body) {
+              const bgColor = window.getComputedStyle(body).backgroundColor;
+              const metaTheme = document.querySelector("meta[name='theme-color']");
+              if (metaTheme) metaTheme.setAttribute("content", bgColor);
+            }
+          });
+        }
+        
+        // Set early to prevent flash
+        reflectPreference();
+        
+        // Defer event listeners until page load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initTheme);
+        } else {
+          initTheme();
+        }
+        
+        function initTheme() {
+          const themeBtn = document.querySelector("#theme-btn");
+          if (themeBtn) {
+            themeBtn.addEventListener("click", () => {
+              themeValue = themeValue === "light" ? "dark" : "light";
+              setPreference();
+            });
+          }
+          
+          // Sync with system changes
+          window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches: isDark }) => {
+            themeValue = isDark ? "dark" : "light";
+            setPreference();
+          });
+          
+          // Handle Astro view transitions
+          document.addEventListener("astro:after-swap", () => {
+            reflectPreference();
+            const newThemeBtn = document.querySelector("#theme-btn");
+            if (newThemeBtn) {
+              newThemeBtn.addEventListener("click", () => {
+                themeValue = themeValue === "light" ? "dark" : "light";
+                setPreference();
+              });
+            }
+          });
+        }
+        
+        // Make downloadPDF available globally
+        window.downloadPDF = function() {
+          const link = document.createElement("a");
+          link.href = "/resume/resume.pdf";
+          link.download = "Ritik_Rana_Resume.pdf";
+          link.click();
+        };
+      })();
+    </script>
   </head>
   <body>
     <slot />

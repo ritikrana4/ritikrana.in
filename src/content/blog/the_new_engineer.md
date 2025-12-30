@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - ai
-description: ""
+description: "The future of software engineering in the AI era. Learn why competing with AI on execution is futile and discover the human skills that matter: problem discovery, product thinking, and rapid iteration. Become an engineer who orchestrates AI tools rather than competing with them."
 ---
 For decades, software engineering talent was measured by a simple formula: how quickly could you think through a problem and translate that thinking into working code? The industry standardized around this. Hiring managers counted sprint velocities. Companies measured productivity in lines of code and tickets closed. We optimized for speed in the thinking-to-implementation pipeline.
 
