@@ -8,7 +8,7 @@ draft: false
 tags:
   - javascript
   - design
-description: "Learn how to build lightweight, customizable UI components using the Headless UI pattern. Compare traditional component libraries with headless approaches and discover how to create flexible, accessible components without pre-set styling."
+description: "Build lightweight, customizable UI components using the Headless UI pattern."
 ---
 
 This article dives into a comparison between mainstream UI component libraries and a new design pattern which helps in crafting light weighted yet effective components.
