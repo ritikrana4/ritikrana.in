@@ -1,7 +1,7 @@
 ---
 title: "Why git rebase"
 author: "Ritik Rana"
-pubDatetime: 2026-01-21T09:12:47.400Z
+pubDatetime: 2026-01-21T10:20:47.400Z
 slug: why-git-rebase
 featured: false
 draft: false
