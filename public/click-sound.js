@@ -4,9 +4,12 @@
 const clickAudio = new Audio('/click.wav');
 clickAudio.volume = 0.2; // Adjust volume as needed
 
+
 function playClickSound(e) {
   // Prevent double-triggering on keyboard navigation
   if (e.isTrusted) {
+    const enabled = localStorage.getItem('sound-enabled') !== 'false';
+    if (!enabled) return;
     clickAudio.currentTime = 0;
     clickAudio.play();
   }
