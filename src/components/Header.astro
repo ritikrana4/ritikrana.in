@@ -204,8 +204,10 @@ const { activeNav } = Astro.props;
   // Sound toggle logic
   function updateSoundIcon() {
     const soundOn = localStorage.getItem('sound-enabled') !== 'false';
-    document.getElementById('sound-on').style.display = soundOn ? '' : 'none';
-    document.getElementById('sound-off').style.display = soundOn ? 'none' : '';
+  const soundOnEl = document.getElementById('sound-on');
+  const soundOffEl = document.getElementById('sound-off');
+  if (soundOnEl) soundOnEl.style.display = soundOn ? '' : 'none';
+  if (soundOffEl) soundOffEl.style.display = soundOn ? 'none' : '';
     const btn = document.getElementById('sound-btn');
     if (btn) btn.setAttribute('aria-label', soundOn ? 'sound on' : 'sound off');
   }
