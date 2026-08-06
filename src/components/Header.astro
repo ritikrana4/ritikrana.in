@@ -1,252 +1,252 @@
 ---
-import { LOGO_IMAGE, SITE } from "@config";
-import Hr from "./Hr.astro";
-import LinkButton from "./LinkButton.astro";
+import { SITE } from "@config";
 
 export interface Props {
-  activeNav?: "posts" | "tags" | "about" | "search" | "projects";
+  activeNav?:
+    | "home"
+    | "projects"
+    | "experience"
+    | "posts"
+    | "about"
+    | "search"
+    | "tags";
 }
 
 const { activeNav } = Astro.props;
+
+const navLinks = [
+  { href: "/", label: "About Me", key: "home" as const, brand: true },
+  {
+    href: "/experience/",
+    label: "Experience",
+    key: "experience" as const,
+  },
+  {
+    href: "/projects/",
+    label: "Projects",
+    key: "projects" as const,
+  },
+];
 ---
 
-<header>
+<header class="rj-toolbar">
   <a id="skip-to-content" href="#main-content">Skip to content</a>
-  <div class="nav-container">
-    <div class="top-nav-wrap">
-      <a href="/" class="logo whitespace-nowrap">
-        {
-          LOGO_IMAGE.enable ? (
-            <img
-              src={`/assets/${LOGO_IMAGE.svg ? "logo.svg" : "logo.png"}`}
-              alt={SITE.title}
-              width={LOGO_IMAGE.width}
-              height={LOGO_IMAGE.height}
-            />
-          ) : (
-            SITE.title
-          )
-        }
-      </a>
-      <nav id="nav-menu">
-        <button
-          class="hamburger-menu focus-outline"
-          aria-label="Open Menu"
-          aria-expanded="false"
-          aria-controls="menu-items"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="menu-icon"
-          >
-            <line x1="7" y1="12" x2="21" y2="12" class="line"></line>
-            <line x1="3" y1="6" x2="21" y2="6" class="line"></line>
-            <line x1="12" y1="18" x2="21" y2="18" class="line"></line>
-            <line x1="18" y1="6" x2="6" y2="18" class="close"></line>
-            <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
-          </svg>
-        </button>
-        <ul id="menu-items" class="display-none sm:flex">
-          <!-- Navigation items hidden: Posts, Projects, About -->
-          <!-- Uncomment or restore these links if you want them visible again -->
-          <!--
+  <nav class="rj-toolbar-nav" aria-label="Primary">
+    <ul class="rj-nav-list">
+      {
+        navLinks.map(link => (
           <li>
-            <a href="/posts/" class={activeNav === "posts" ? "active" : ""}>
-              Posts
+            <a
+              href={link.href}
+              class:list={[
+                "rj-nav-link",
+                { "rj-nav-link-brand": link.brand },
+                { "rj-nav-link-active": activeNav === link.key },
+              ]}
+              aria-current={activeNav === link.key ? "page" : undefined}
+            >
+              <span class="rj-nav-label">{link.label}</span>
             </a>
           </li>
-          <li>
-            <a href="/projects/" class={activeNav === "projects" ? "active" : ""}>
-              Projects
-            </a>
-          </li>
-          <li>
-            <a href="/about/" class={activeNav === "about" ? "active" : ""}>
-              About
-            </a>
-          </li>
-          -->
-          {
-            SITE.lightAndDarkMode && (
-              <>
-                <li>
-                  <button
-                    id="sound-btn"
-                    class="focus-outline"
-                    title="Toggle click sounds"
-                    aria-label="sound on"
-                    aria-live="polite"
-                  >
-                    <svg id="sound-on" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z"/>
-                    </svg>
-                    <svg id="sound-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display:none">
-                      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM19 12c0 2.08-1.02 3.93-2.62 5.11l1.45 1.45C19.07 17.09 20 14.66 20 12c0-2.66-.93-5.09-2.17-6.56l-1.45 1.45C17.98 8.07 19 9.92 19 12zm-7-8v16l-5-5H3V9h4l5-5zm9.19 16.19l-1.41 1.41-18-18 1.41-1.41 18 18z"/>
-                    </svg>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    id="theme-btn"
-                    class="focus-outline"
-                    title="Toggles light & dark"
-                    aria-label="auto"
-                    aria-live="polite"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg">
-                      <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg">
-                      <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" />
-                    </svg>
-                  </button>
-                </li>
-              </>
-            )
-          }
-        </ul>
-      </nav>
+        ))
+      }
+    </ul>
+
+    <span class="rj-toolbar-divider" aria-hidden="true"></span>
+
+    <div class="rj-toolbar-actions">
+      {
+        SITE.lightAndDarkMode && (
+          <>
+            <button
+              id="sound-btn"
+              class="rj-icon-btn"
+              title="Toggle click sounds"
+              aria-label="sound on"
+              aria-live="polite"
+            >
+              <svg id="sound-on" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z" />
+              </svg>
+              <svg id="sound-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none">
+                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM19 12c0 2.08-1.02 3.93-2.62 5.11l1.45 1.45C19.07 17.09 20 14.66 20 12c0-2.66-.93-5.09-2.17-6.56l-1.45 1.45C17.98 8.07 19 9.92 19 12zm-7-8v16l-5-5H3V9h4l5-5zm9.19 16.19l-1.41 1.41-18-18 1.41-1.41 18 18z" />
+              </svg>
+            </button>
+            <button
+              id="theme-btn"
+              class="rj-icon-btn"
+              title="Toggle light & dark"
+              aria-label="auto"
+              aria-live="polite"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" />
+              </svg>
+            </button>
+          </>
+        )
+      }
     </div>
-  </div>
-  <Hr />
+  </nav>
 </header>
 
 <style>
   #skip-to-content {
     @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
   }
-  .nav-container {
-    @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
-  }
-  .top-nav-wrap {
-    @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
-  }
-  .logo {
-    @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
-  }
-  .hamburger-menu {
-    @apply self-end p-2 sm:hidden;
-  }
-  .hamburger-menu svg {
-    @apply h-6 w-6 scale-125 fill-skin-base;
+
+  /* ── Toolbar container (fixed, centered, floating) ── */
+  .rj-toolbar {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+    max-width: calc(100vw - 1rem);
   }
 
-  nav {
-    @apply flex w-full flex-col items-center sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
-  }
-  nav ul {
-    @apply mt-4 w-44 grid-cols-2 grid-rows-4 gap-x-2 gap-y-2 sm:ml-0 sm:mt-0 sm:w-auto sm:gap-x-5 sm:gap-y-0;
-  }
-  nav ul li {
-    @apply col-span-2 flex items-center justify-center;
-  }
-  nav ul li a {
-    @apply text-base w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1;
-  }
-  nav ul li:nth-last-child(2) a {
-    @apply w-auto;
-  }
-  nav ul li:nth-last-child(1),
-  nav ul li:nth-last-child(2) {
-    @apply col-span-1;
-  }
-  nav a.active {
-    @apply underline decoration-2 underline-offset-8;
-  }
-  nav a.active svg {
-    @apply fill-skin-accent;
+  .rj-toolbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 4px 6px;
+    border: 1px solid rgba(var(--color-border), 0.6);
+    border-radius: 999px;
+    background: rgba(var(--color-fill), 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   }
 
-  nav button {
-    @apply p-1;
-  }
-  nav button svg {
-    @apply h-6 w-6 fill-skin-base hover:fill-skin-accent;
-  }
-  #theme-btn {
-    @apply p-3 sm:p-1;
-  }
-  #theme-btn svg {
-    @apply scale-125 hover:rotate-12 sm:scale-100;
+  html[data-theme="dark"] .rj-toolbar-nav {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   }
 
-  .menu-icon line {
-    @apply transition-opacity duration-75 ease-in-out;
-  }
-  .menu-icon .close {
-    opacity: 0;
-  }
-  .menu-icon.is-active .line {
-    @apply opacity-0;
-  }
-  .menu-icon.is-active .close {
-    @apply opacity-100;
+  .rj-nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  #sound-btn {
-    @apply p-3 sm:p-1;
-    margin-right: 0.25rem;
+  /* ── Nav links (rounded pills) ── */
+  .rj-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.005em;
+    transition: color 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
   }
-  #sound-btn svg {
-    @apply h-6 w-6;
+
+  .rj-nav-link:hover {
+    color: rgb(var(--color-text-base));
+    background: rgb(var(--color-card));
+  }
+
+  .rj-nav-link-active {
+    color: rgb(var(--color-fill));
+    background: rgb(var(--color-text-base));
+  }
+
+  .rj-nav-link-active:hover {
+    color: rgb(var(--color-fill));
+    background: rgb(var(--color-text-base));
+    opacity: 0.9;
+  }
+
+  .rj-nav-link-brand {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Divider between nav and actions ── */
+  .rj-toolbar-divider {
+    width: 1px;
+    height: 1rem;
+    background: rgb(var(--color-border));
+    margin: 0 4px;
+  }
+
+  /* ── Right-side action buttons ── */
+  .rj-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .rj-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .rj-icon-btn:hover {
+    background: rgb(var(--color-card));
+    color: rgb(var(--color-text-base));
+  }
+
+  #sun-svg,
+  html[data-theme="dark"] #moon-svg {
+    display: none;
+  }
+  #moon-svg,
+  html[data-theme="dark"] #sun-svg {
+    display: block;
+  }
+
+  @media (max-width: 520px) {
+    .rj-nav-link {
+      padding: 6px 10px;
+    }
   }
 </style>
 
 <script>
-  // Sound toggle logic
   function updateSoundIcon() {
-    const soundOn = localStorage.getItem('sound-enabled') !== 'false';
-  const soundOnEl = document.getElementById('sound-on');
-  const soundOffEl = document.getElementById('sound-off');
-  if (soundOnEl) soundOnEl.style.display = soundOn ? '' : 'none';
-  if (soundOffEl) soundOffEl.style.display = soundOn ? 'none' : '';
-    const btn = document.getElementById('sound-btn');
-    if (btn) btn.setAttribute('aria-label', soundOn ? 'sound on' : 'sound off');
+    const soundOn = localStorage.getItem("sound-enabled") !== "false";
+    const soundOnEl = document.getElementById("sound-on");
+    const soundOffEl = document.getElementById("sound-off");
+    if (soundOnEl) (soundOnEl as HTMLElement).style.display = soundOn ? "" : "none";
+    if (soundOffEl) (soundOffEl as HTMLElement).style.display = soundOn ? "none" : "";
+    const btn = document.getElementById("sound-btn");
+    if (btn) btn.setAttribute("aria-label", soundOn ? "sound on" : "sound off");
   }
   function setupSoundBtn() {
-    const btn = document.getElementById('sound-btn');
+    const btn = document.getElementById("sound-btn");
     if (!btn) return;
-    btn.addEventListener('click', () => {
-      const enabled = localStorage.getItem('sound-enabled') !== 'false';
-      localStorage.setItem('sound-enabled', enabled ? 'false' : 'true');
+    btn.addEventListener("click", () => {
+      const enabled = localStorage.getItem("sound-enabled") !== "false";
+      localStorage.setItem("sound-enabled", enabled ? "false" : "true");
       updateSoundIcon();
     });
     updateSoundIcon();
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupSoundBtn);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupSoundBtn);
   } else {
     setupSoundBtn();
   }
-  document.addEventListener('astro:after-swap', setupSoundBtn);
-  function toggleNav() {
-    // Toggle menu
-    const menuBtn = document.querySelector(".hamburger-menu");
-    const menuIcon = document.querySelector(".menu-icon");
-    const menuItems = document.querySelector("#menu-items");
-
-    menuBtn?.addEventListener("click", () => {
-      const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
-      menuIcon?.classList.toggle("is-active");
-      menuBtn.setAttribute("aria-expanded", menuExpanded ? "false" : "true");
-      menuBtn.setAttribute(
-        "aria-label",
-        menuExpanded ? "Open Menu" : "Close Menu"
-      );
-      menuItems?.classList.toggle("display-none");
-    });
-  }
-
-  toggleNav();
-
-  // Runs on view transitions navigation
-  document.addEventListener("astro:after-swap", toggleNav);
+  document.addEventListener("astro:after-swap", setupSoundBtn);
 </script>

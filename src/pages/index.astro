@@ -1,127 +1,294 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
-import Card from "@components/Card";
-import Socials from "@components/Socials.astro";
-import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS, SITE } from "@config";
+import { SITE } from "@config";
 
-const posts = await getCollection("blog");
-
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-
-const socialCount = SOCIALS.filter(social => social.active).length;
+const currentYear = new Date().getFullYear();
 ---
 
-<Layout>
+<Layout title={`${SITE.author} — Software Engineer`}>
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": SITE.author,
+    "name": "Ritik Rana",
     "url": SITE.website,
-    "sameAs": SOCIALS.filter(s => s.active).map(s => s.href),
-    "jobTitle": "Software Developer",
+    "sameAs": [
+      "https://github.com/ritikrana4",
+      "https://www.linkedin.com/in/ritikrana/",
+      "https://www.instagram.com/ritik.r9/",
+    ],
+    "jobTitle": "Software Engineer",
     "description": SITE.desc
   })} />
-  <Header />
-  <main id="main-content">
-    <Hr />
-    <section id="main-aboutme">
-      <div>
-        <h1>Hey,I'm Ritik</h1>
-        <h3>
-          I'm just a regular person who enjoys playing with code and creating
-          things for fun. Here I chat about life, share my coding adventures,
-          dive into design, and more.
-        </h3>
-      </div>
-    </section>
-    <!-- {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    } -->
 
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 5 && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
-          </ul>
-        </section>
-      )
-    }
+  <Header activeNav="home" />
 
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All Posts
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
+  <main class="rj-main" id="main-content">
+    <div class="rj-container">
+
+      <!-- ── HERO ── -->
+      <section class="rj-hero">
+        <div class="rj-hero-row">
+          <div class="rj-hero-text">
+            <h1 class="rj-name">Hi, I'm Ritik Rana</h1>
+          </div>
+        </div>
+
+        <div class="rj-pills">
+          <a
+            href="mailto:ritikrana4@gmail.com"
+            rel="noopener noreferrer"
+            class="rj-pill"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rj-pill-icon" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+            </svg>
+            <span class="rj-pill-label">Email</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ritikrana/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rj-pill"
+          >
+            <svg viewBox="0 0 448 512" fill="currentColor" class="rj-pill-icon" aria-hidden="true">
+              <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path>
+            </svg>
+            <span class="rj-pill-label">LinkedIn</span>
+          </a>
+          <a
+            href="https://github.com/ritikrana4"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rj-pill"
+          >
+            <svg viewBox="0 0 496 512" fill="currentColor" class="rj-pill-icon" aria-hidden="true">
+              <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"></path>
+            </svg>
+            <span class="rj-pill-label">GitHub</span>
+          </a>
+          <a
+            href="https://www.instagram.com/ritik.r9/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rj-pill"
+          >
+            <svg viewBox="0 0 448 512" fill="currentColor" class="rj-pill-icon" aria-hidden="true">
+              <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+            </svg>
+            <span class="rj-pill-label">Instagram</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── ABOUT ── -->
+      <section class="rj-section">
+        <h2 class="rj-label">About</h2>
+        <div class="rj-body">
+          <p>
+            I am a Software Engineer who loves building products from zero to one —
+            taking ideas from a blank canvas to something people genuinely enjoy using.
+            I'm passionate about solving real-world problems, moving quickly, iterating
+            based on feedback, and crafting products that balance great user experience
+            with scalable engineering.
+          </p>
+          <p>
+            I thrive in fast-moving environments where ownership, experimentation, and
+            continuous learning drive meaningful impact. Currently building
+            <a href="/projects/tribit/" class="rj-ilink">Tribit</a> —
+            a native desktop git worktree manager with an embedded AI terminal.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── CONTACT ── -->
+      <section class="rj-section rj-section-last">
+        <h2 class="rj-label">Contact</h2>
+        <p class="rj-body-p">
+          Want to build something together? Hit me up on
+          <a href="mailto:ritikrana4@gmail.com" class="rj-ilink">Email</a> or
+          <a href="https://www.linkedin.com/in/ritikrana/" target="_blank" rel="noopener" class="rj-ilink">LinkedIn</a>.
+          Let's create something that doesn't end up in the GitHub graveyard.
+        </p>
+      </section>
+
     </div>
   </main>
 
-  <!-- <Footer /> -->
+  <footer class="rj-footer">
+    <p>© {currentYear} Ritik Rana</p>
+  </footer>
 </Layout>
 
 <style>
-  /* ===== Hero Section ===== */
-  .social-wrapper {
-    @apply mt-4 flex flex-col sm:flex-row sm:items-center;
-  }
-  .social-links {
-    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
-  }
+/* ── Main / container ─────────────────────────────── */
+.rj-main {
+  flex: 1;
+  padding-top: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
-  /* ===== Featured & Recent Posts Sections ===== */
-  #featured,
-  #recent-posts {
-    @apply pb-6 pt-12;
+.rj-container {
+  max-width: 42rem; /* max-w-2xl */
+  margin: 0 auto;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.rj-hero {
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rj-hero-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.rj-hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.rj-name {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: rgb(var(--color-text-base));
+  margin: 0;
+}
+
+/* ── Pills (contact row) ──────────────────────────── */
+.rj-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.rj-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(var(--color-text-base));
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.rj-pill:hover {
+  background: rgb(var(--color-card));
+  border-color: rgba(var(--color-text-base), 0.25);
+}
+
+.rj-pill-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.rj-pill-label {
+  display: none;
+}
+
+/* ── Sections ─────────────────────────────────────── */
+.rj-section {
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rj-section-last {
+  margin-bottom: 0;
+}
+
+.rj-label {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(var(--color-text-muted, var(--color-text-base)));
+  margin: 0;
+}
+
+.rj-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rj-body p,
+.rj-body-p {
+  font-size: 1rem;
+  line-height: 1.625;
+  color: rgb(var(--color-text-muted, var(--color-text-base)));
+  margin: 0;
+}
+
+/* Inline link — signature underlined-with-green style */
+.rj-ilink {
+  font-weight: 500;
+  color: rgb(var(--color-text-base));
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--color-accent), 0.5);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.rj-ilink:hover {
+  text-decoration-color: rgb(var(--color-accent));
+}
+
+/* ── Footer ───────────────────────────────────────── */
+.rj-footer {
+  border-top: 1px solid rgba(var(--color-border), 0.5);
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.rj-footer p {
+  font-size: 0.875rem;
+  color: rgb(var(--color-text-muted, var(--color-text-base)));
+  margin: 0;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (min-width: 640px) {
+  .rj-pill {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
   }
-  #featured h2,
-  #recent-posts h2 {
-    @apply text-2xl font-semibold tracking-wide;
+  .rj-pill-label {
+    display: inline;
   }
-  .all-posts-btn-wrapper {
-    @apply text-center;
+}
+
+@media (min-width: 768px) {
+  .rj-name {
+    font-size: 3rem;
+    line-height: 1;
   }
-  #main-aboutme h1 {
-    @apply text-3xl font-bold  mt-10;
+  .rj-container {
+    padding-top: 5rem;
   }
-  #main-aboutme h3 {
-    @apply text-base font-medium mb-0 mt-6 text-lg tracking-tighter leading-7;
-  }
+}
 </style>

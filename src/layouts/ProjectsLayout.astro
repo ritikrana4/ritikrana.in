@@ -1,10 +1,7 @@
 ---
 import { SITE } from "@config";
-import Breadcrumbs from "@components/Breadcrumbs.astro";
-import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import Layout from "./Layout.astro";
-import Main from "./Main.astro";
 
 export interface Props {
   frontmatter: {
@@ -13,153 +10,242 @@ export interface Props {
   };
 }
 const { frontmatter } = Astro.props;
+const currentYear = new Date().getFullYear();
 
 const projects = [
   {
-    year: "2025",
-    title: "@rtkstack/mapper",
+    id: "tribit",
+    year: "2026",
+    title: "Tribit",
     description:
-      "A flexible React TypeScript component for creating mappings with searchable dropdowns, dynamic row management",
-    stars: 2,
-    links: [
-      { type: "Source", url: "https://github.com/ritikrana4/rtk-mapping" },
-      { type: "Demo", url: "https://codesandbox.io/p/sandbox/ggd4hv" },
-      { type: "npm", url: "https://www.npmjs.com/package/@rtkstack/mapper" },
-    ],
+      "A native desktop app for visual git worktree management with an embedded AI terminal. Drag-and-drop canvas, multi-repo sidebar, VS Code-style diff viewer, and agent integration with Claude and GitHub Copilot.",
+    featured: true,
+    size: "large",
+    link: "/projects/tribit/",
+    external: false,
+    linkLabel: "Learn more",
+    secondaryLink: "https://github.com/ritikrana4/tribit/releases",
+    secondaryLabel: "Download",
   },
-  // {
-  //     year: "2022",
-  //     title: "Keyboard Accordion",
-  //     description: "Play the accordion online!",
-  //     stars: 189,
-  //     links: [
-  //         { type: "Article", url: "#" },
-  //         { type: "Demo", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2020",
-  //     title: "TakeNote",
-  //     description: "A free, open source notes app",
-  //     stars: 7021,
-  //     links: [
-  //         { type: "Article", url: "#" },
-  //         { type: "Demo", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2019",
-  //     title: "Chip8",
-  //     description: "A retro game emulator",
-  //     stars: 447,
-  //     links: [
-  //         { type: "Article", url: "#" },
-  //         { type: "Demo", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2021",
-  //     title: "Sokoban",
-  //     description: "A web-based Sokoban",
-  //     stars: 92,
-  //     links: [
-  //         { type: "Article", url: "#" },
-  //         { type: "Demo", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2015",
-  //     title: "New Moon",
-  //     description: "The optimized dark theme",
-  //     stars: 1229,
-  //     links: [
-  //         { type: "Demo", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2018",
-  //     title: "Laconia",
-  //     description: "An MVC framework from scratch",
-  //     stars: 362,
-  //     links: [
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2017",
-  //     title: "Primitive",
-  //     description: "A front-end design toolkit",
-  //     stars: 931,
-  //     links: [
-  //         { type: "Demo", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // },
-  // {
-  //     year: "2019",
-  //     title: "Snek",
-  //     description: "A terminal-based Snake",
-  //     stars: 273,
-  //     links: [
-  //         { type: "Article", url: "#" },
-  //         { type: "Source", url: "#" }
-  //     ]
-  // }
 ];
 ---
 
 <Layout title={`${frontmatter.title} | ${SITE.title}`}>
   <Header activeNav="projects" />
-  <Main pageTitle="Projects" pageDesc="" />
-  <!-- <Breadcrumbs /> -->
-  <div class="projects-container">
-    <!-- <div class="header">
-            <h1>Projects</h1>
-            <p>
-                Open-source projects I've made over the years, including this website,
-                an emulator, and various games, apps, frameworks, and boilerplates.
-            </p>
-        </div> -->
 
-    <div class="projects-grid">
-      {
-        projects.map((project, index) => (
-          <div
-            class="project-card"
-            style={`animation-delay: ${(index + 1) * 0.1}s`}
-          >
-            {/* <div class="project-header">
-                        <span class="project-year">{project.year}</span>
-                        <div class="project-stars">
-                            <span class="star-icon">⭐</span>
-                            <span>{project.stars.toLocaleString()}</span>
-                        </div>
-                    </div> */}
+  <main class="rj-main" id="main-content">
+    <div class="rj-proj-container">
 
-            <h2 class="project-title">{project.title}</h2>
-            <p class="project-description">{project.description}</p>
+      <!-- Page header -->
+      <div class="rj-proj-header">
+        <h1 class="rj-proj-h1">Projects</h1>
+        <p class="rj-proj-sub">Things I've built and shipped.</p>
+      </div>
 
-            <div class="project-links">
-              {project.links.map(link => (
-                <a
-                  href={link.url}
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
+      <!-- Grid -->
+      <div class="rj-proj-grid">
+        {
+          projects.map(project => (
+            <a
+              href={project.link}
+              target={project.external === false ? undefined : "_blank"}
+              rel={project.external === false ? undefined : "noopener noreferrer"}
+              class={`rj-proj-card${project.size === "large" ? " rj-proj-card-large" : ""}`}
+            >
+              <div class="rj-proj-top">
+                <div class="rj-proj-title-wrap">
+                  <h3 class={`rj-proj-title${project.size === "large" ? " rj-proj-title-large" : ""}`}>
+                    {project.title}
+                  </h3>
+                  <span class="rj-proj-year">{project.year}</span>
+                </div>
+                <svg
+                  class="rj-proj-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
                 >
-                  {link.type}
-                </a>
-              ))}
-            </div>
-          </div>
-        ))
-      }
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                  <polyline points="7 7 17 7 17 17" />
+                </svg>
+              </div>
+
+              <p class="rj-proj-desc">{project.description}</p>
+            </a>
+          ))
+        }
+      </div>
+
     </div>
-  </div>
+  </main>
+
+  <footer class="rj-footer">
+    <p>© {currentYear} Ritik Rana</p>
+  </footer>
 </Layout>
-<Footer />
+
+<style>
+  .rj-main {
+    flex: 1;
+    padding-top: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .rj-proj-container {
+    max-width: 42rem; /* max-w-2xl — match home & experience */
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+
+  .rj-proj-header {
+    margin-bottom: 3rem;
+  }
+
+  .rj-proj-h1 {
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: rgb(var(--color-text-base));
+    margin: 0 0 1rem 0;
+  }
+
+  .rj-proj-sub {
+    font-size: 1.125rem;
+    line-height: 1.625;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    margin: 0;
+  }
+
+  .rj-proj-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .rj-proj-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-fill));
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .rj-proj-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(var(--color-accent), 0.5);
+    background: rgba(var(--color-card), 0.5);
+    box-shadow: 0 10px 15px -3px rgba(var(--color-accent), 0.05), 0 4px 6px -4px rgba(var(--color-accent), 0.05);
+  }
+
+  .rj-proj-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .rj-proj-title-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .rj-proj-title {
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-base));
+    letter-spacing: -0.01em;
+    margin: 0;
+    transition: color 0.15s ease;
+  }
+
+  .rj-proj-title-large {
+    font-size: 1.25rem;
+  }
+
+  .rj-proj-card:hover .rj-proj-title {
+    color: rgb(var(--color-accent));
+  }
+
+  .rj-proj-year {
+    font-family: "Geist Mono", monospace;
+    font-size: 0.75rem;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+  }
+
+  .rj-proj-arrow {
+    width: 1rem;
+    height: 1rem;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    opacity: 0.5;
+    flex-shrink: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  .rj-proj-card:hover .rj-proj-arrow {
+    opacity: 1;
+    color: rgb(var(--color-accent));
+    transform: translate(2px, -2px);
+  }
+
+  .rj-proj-desc {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    margin: 0;
+    flex: 1;
+  }
+
+  /* ── Footer ── */
+  .rj-footer {
+    border-top: 1px solid rgba(var(--color-border), 0.5);
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .rj-footer p {
+    font-size: 0.875rem;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    margin: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (min-width: 768px) {
+    .rj-proj-container {
+      padding-top: 5rem;
+    }
+    .rj-proj-h1 {
+      font-size: 3rem;
+      line-height: 1;
+    }
+    .rj-proj-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .rj-proj-card-large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+</style>

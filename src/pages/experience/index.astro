@@ -1,0 +1,409 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import { SITE } from "@config";
+
+const currentYear = new Date().getFullYear();
+
+const experience = [
+  {
+    id: "axtria-senior",
+    company: "Axtria",
+    role: "Senior Software Engineer",
+    period: "Apr 2024 — Present",
+    location: "Noida, India",
+    locationType: "Onsite",
+    current: true,
+    link: "https://www.axtria.com/",
+    bullets: [
+      "Architected an enterprise agent chat experience adopted across 5+ product teams — React UI with streaming, RAG-grounded LLM responses over WebSockets, tool-call visualization, and conversation state management.",
+      "Built an AI Text-to-SQL editor library end-to-end — React editor UI backed by LLM SQL generation grounded via retrieval (RAG) over database schemas and KPI metadata — cutting KPI setup time from hours to minutes for analysts.",
+      "Introduced AI-assisted development workflows — internal skill templates, spec kits, and a centralized marketplace of reusable skills — cutting feature turnaround time by ~30%.",
+      "Modularized UI components into 10+ standalone npm packages published to Nexus, enabling independent versioning and reuse across product teams.",
+      "Strengthened the CI/CD pipeline with automated test suites and SonarQube quality gates, reducing post-release defects by ~25%.",
+    ],
+  },
+  {
+    id: "axtria-swe",
+    company: "Axtria",
+    role: "Software Engineer",
+    period: "Jul 2022 — Apr 2024",
+    location: "Bengaluru, India",
+    locationType: "Onsite",
+    current: false,
+    link: "https://www.axtria.com/",
+    bullets: [
+      "Core contributor to the company-wide design system of reusable React components (Storybook), adopted by core products including CustomerIQ and MarketingIQ.",
+      "Built UIs for the AI-ML models library and data-source connector plugins powering core analytics products (CustomerIQ, MarketingIQ).",
+      "Cut initial page load time by ~40% through lazy loading, code splitting, and caching strategies.",
+      "Designed and built a WebSocket-based real-time notification engine end-to-end (server and client), supporting 1,000+ concurrent users.",
+      "Built analytics dashboards with React.js and Highcharts used daily by enterprise pharma clients.",
+      "Led team workshops on Jest and React Testing Library, raising test coverage from ~50% to 80%.",
+    ],
+  },
+  {
+    id: "axtria-intern",
+    company: "Axtria",
+    role: "Software Engineering Intern",
+    period: "Jan 2022 — Jul 2022",
+    location: "Bengaluru, India",
+    locationType: "Onsite",
+    current: false,
+    link: "https://www.axtria.com/",
+    bullets: [
+      "Developed an interactive data-visualization dashboard library using Highcharts; converted to full-time SWE role.",
+      "Implemented responsive layouts across device viewports, improving mobile UX for client-facing products.",
+    ],
+  },
+];
+---
+
+<Layout title={`Experience | ${SITE.title}`}>
+  <Header activeNav="experience" />
+
+  <main class="rj-main" id="main-content">
+    <div class="rj-exp-container">
+
+      <!-- Page header -->
+      <div class="rj-exp-header">
+        <h1 class="rj-exp-h1">Experience</h1>
+        <p class="rj-exp-sub">My professional journey so far.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="rj-exp-timeline">
+        <div class="rj-exp-track" aria-hidden="true"></div>
+        <div class="rj-exp-entries">
+          {
+            experience.map(exp => (
+              <div class="rj-exp-entry">
+                <div
+                  class:list={[
+                    "rj-exp-dot",
+                    { "rj-exp-dot-current": exp.current },
+                  ]}
+                  aria-hidden="true"
+                />
+                <div class="rj-exp-body">
+                  <div class="rj-exp-top">
+                    <div class="rj-exp-title-row">
+                      {exp.link ? (
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="rj-exp-company rj-ilink"
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        <span class="rj-exp-company">{exp.company}</span>
+                      )}
+                      {exp.current && (
+                        <span class="rj-exp-badge rj-exp-badge-current">
+                          Current
+                        </span>
+                      )}
+                    </div>
+                    <p class="rj-exp-role">{exp.role}</p>
+                  </div>
+
+                  <div class="rj-exp-meta">
+                    <span class="rj-exp-period">{exp.period}</span>
+                    <span class="rj-exp-location">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rj-exp-icon" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      {exp.location}
+                    </span>
+                    <span
+                      class:list={[
+                        "rj-exp-badge",
+                        {
+                          "rj-exp-badge-remote":
+                            exp.locationType === "Remote",
+                        },
+                        {
+                          "rj-exp-badge-onsite":
+                            exp.locationType === "Onsite",
+                        },
+                      ]}
+                    >
+                      {exp.locationType === "Remote" ? (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rj-exp-icon" aria-hidden="true">
+                          <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                          <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                          <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                          <line x1="12" y1="20" x2="12.01" y2="20" />
+                        </svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rj-exp-icon" aria-hidden="true">
+                          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                          <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                      )}
+                      {exp.locationType}
+                    </span>
+                  </div>
+
+                  <ul class="rj-exp-bullets">
+                    {exp.bullets.map(pt => (
+                      <li class="rj-exp-bullet">
+                        <span class="rj-exp-bullet-dot" aria-hidden="true" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="rj-footer">
+    <p>© {currentYear} Ritik Rana</p>
+  </footer>
+</Layout>
+
+<style>
+  .rj-main {
+    flex: 1;
+    padding-top: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .rj-exp-container {
+    max-width: 42rem; /* max-w-2xl */
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+
+  .rj-exp-header {
+    margin-bottom: 3rem;
+  }
+
+  .rj-exp-h1 {
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: rgb(var(--color-text-base));
+    margin: 0 0 1rem 0;
+  }
+
+  .rj-exp-sub {
+    font-size: 1.125rem;
+    line-height: 1.625;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    margin: 0;
+  }
+
+  /* ── Timeline ─────────────────────────────────────── */
+  .rj-exp-timeline {
+    position: relative;
+  }
+
+  .rj-exp-track {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: rgb(var(--color-border));
+  }
+
+  .rj-exp-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .rj-exp-entry {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .rj-exp-dot {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(var(--color-text-muted, var(--color-text-base)), 0.5);
+    transform: translateX(-3px);
+  }
+
+  .rj-exp-dot-current {
+    background: rgb(var(--color-accent));
+    box-shadow: 0 0 0 4px rgba(var(--color-accent), 0.2);
+  }
+
+  .rj-exp-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .rj-exp-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .rj-exp-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .rj-exp-company {
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-base));
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .rj-exp-company.rj-ilink {
+    text-decoration: underline;
+    text-decoration-color: rgba(var(--color-accent), 0.5);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.15s ease;
+  }
+
+  .rj-exp-company.rj-ilink:hover {
+    text-decoration-color: rgb(var(--color-accent));
+  }
+
+  .rj-exp-role {
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .rj-exp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rj-exp-period {
+    font-family: "Geist Mono", monospace;
+    font-size: 0.8125rem;
+  }
+
+  .rj-exp-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+  }
+
+  .rj-exp-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .rj-exp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .rj-exp-badge-current {
+    background: rgba(var(--color-accent), 0.1);
+    color: rgb(var(--color-accent));
+  }
+
+  .rj-exp-badge-remote {
+    background: rgba(var(--color-accent), 0.1);
+    color: rgb(var(--color-accent));
+  }
+
+  .rj-exp-badge-onsite {
+    background: rgba(48, 128, 255, 0.1);
+    color: rgb(48, 128, 255);
+  }
+
+  html[data-theme="dark"] .rj-exp-badge-onsite {
+    color: rgb(84, 162, 255);
+  }
+
+  /* ── Bullets ── */
+  .rj-exp-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .rj-exp-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+  }
+
+  .rj-exp-bullet-dot {
+    display: block;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 999px;
+    background: rgba(var(--color-text-muted, var(--color-text-base)), 0.5);
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  /* ── Footer ── */
+  .rj-footer {
+    border-top: 1px solid rgba(var(--color-border), 0.5);
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .rj-footer p {
+    font-size: 0.875rem;
+    color: rgb(var(--color-text-muted, var(--color-text-base)));
+    margin: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (min-width: 768px) {
+    .rj-exp-container {
+      padding-top: 5rem;
+    }
+    .rj-exp-h1 {
+      font-size: 3rem;
+      line-height: 1;
+    }
+  }
+</style>
